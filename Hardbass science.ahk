@@ -15,6 +15,10 @@ if !FileExist(outputFile) {
     }
 }
 
+; Add these global variables at the top of your script, after other global declarations
+global lastUserInput1 := "???"
+global lastUserInput2 := "lorem ipsum"
+
 ; Create a custom GUI for user to choose the shortcut set
 MyGui := Gui(, "w500")
 MyGui.SetFont("s10", "Segoe UI")
@@ -73,26 +77,28 @@ CopyAndProcess(*)
 
 ProcessClipboard(*)
 {
-    global outputFile  ; Use the global outputFile variable
+    global outputFile, lastUserInput1, lastUserInput2  ; Use the global variables
 
     if (A_Clipboard = "") {
         MsgBox("Schowek jest pusty, nic nie skopiowano.", "Uwaga", "T2")
         return
     }
 
-    userInput := InputBox("To zostanie zapiane w kolumnie 1 (np. kategoria, tytuł akpitu): ")
-    if userInput.Result = "Cancel" {
+    userInput1 := InputBox("To zostanie zapiane w kolumnie 1 (np. kategoria, tytuł akpitu): ", , , lastUserInput1)
+    if userInput1.Result = "Cancel" {
         MsgBox("Operacja anulowana przez użytkownika.", "Informacja", "T1")
         return
     }
-    userInput.Value := userInput.Value = "" ? "???" : userInput.Value
+    userInput1.Value := userInput1.Value = "" ? "???" : userInput1.Value
+    lastUserInput1 := userInput1.Value  ; Remember the last input
 
-    userInput2 := InputBox("To zostanie zapiane w kolumnie 2 (np. nazwisko autora): ")
+    userInput2 := InputBox("To zostanie zapiane w kolumnie 2 (np. nazwisko autora): ", , , lastUserInput2)
     if userInput2.Result = "Cancel" {
         MsgBox("Operacja anulowana przez użytkownika.", "Informacja", "T1")
         return
     }
     userInput2.Value := userInput2.Value = "" ? "???" : userInput2.Value
+    lastUserInput2 := userInput2.Value  ; Remember the last input
 
     ; Function to properly escape and quote CSV fields
     EscapeCSV(field) {
@@ -106,12 +112,12 @@ ProcessClipboard(*)
     }
 
     ; Escape and quote the user inputs and clipboard content
-    userInput := EscapeCSV(userInput.Value)
+    userInput1 := EscapeCSV(userInput1.Value)
     userInput2 := EscapeCSV(userInput2.Value)
     clipboardContent := EscapeCSV(A_Clipboard)
 
     ; Create the CSV line
-    csvLine := userInput . "," . userInput2 . "," . clipboardContent . "`n"
+    csvLine := userInput1 . "," . userInput2 . "," . clipboardContent . "`n"
 
     ; Append the user inputs and clipboard content to the CSV file in UTF-16 with BOM
     try {
