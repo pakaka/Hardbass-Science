@@ -22,12 +22,11 @@ ProcessChoice(*)
 {
     shortcutSet := MyGui.Submit()
     if (shortcutSet.ShortcutSet = 1) {
-        MsgBox("Wybrałeś/aś Zestaw: Prawy Alt + 'przecinek' oraz prawy Alt + 'kropka'. Zaczynajmy!")
         SetupSet1()
     } else {
-        MsgBox("Wybrałeś/aś Zestaw 2: Lewy Alt + 'W' oraz lewy Alt + 'e'. Zaczynajmy!")
         SetupSet2()
     }
+    MsgBox("To lecimy!", "Success", "T1")
     MyGui.Destroy()
 }
 
