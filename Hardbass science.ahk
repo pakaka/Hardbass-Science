@@ -7,7 +7,7 @@ SetWorkingDir A_ScriptDir  ; Ensures a consistent starting directory.
 MsgBox("Witamy w Hardbass science 14-10-13-51🤙 `nalt+w używa zaznaczonego tekstu`nalt+e używa ostatnio skopiowanego tekstu.")
 
 ; !w::
-RAlt & n::
+RAlt & ,::
 {
     Send "^c"  ; copy selection
     Sleep 100  ; gives time for the copy to work
@@ -15,7 +15,7 @@ RAlt & n::
 }
 
 ; !e::
-RAlt & m::ProcessClipboard()
+RAlt & .::ProcessClipboard()
 
 ProcessClipboard() {
     if (A_Clipboard = "") {
