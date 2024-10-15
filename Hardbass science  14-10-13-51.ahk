@@ -5,9 +5,8 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ; Display "Hello" message box when the script starts
 ;MsgBox, Witamy w Hardbass science 14-10-13-51🤙 `nalt+w używa zaznaczonego tekstu,`nalt+e używa ostatnio skopiowanego tekstu.`n 
-MsgBox, (Witamy w Hardbass science 14-10-13-51🤙 
-alt+w używa zaznaczonego tekstu
-alt+e używa ostatnio skopiowanego tekstu.)
+MsgBox, Witamy w Hardbass science 14-10-13-51🤙 `nalt+w używa zaznaczonego tekstu,`nalt+e używa ostatnio skopiowanego tekstu.`n 
+
 ;!w::
 RAlt & n::
     Sendinput ^c ; copy selection
