@@ -16,24 +16,20 @@ if !FileExist(outputFile) {
 }
 
 ; Create a custom GUI for user to choose the shortcut set
-MyGui := Gui()
+MyGui := Gui(, "w500")
 MyGui.SetFont("s10", "Segoe UI")
 
 
-MyGui.Add("Text", "x10 y10 w500 h40", "Witam w Hardbass science 🤙️").SetFont("s18")
-MyGui.Add("Text", "x10 y60 w500 h40", "Wybierz preferowany zestaw skrótów klawiszowych:")
-MyGui.Add("Radio", "x10 y100 w500 vShortcutSet Checked", "1: Lewy Alt + 'W'    2: Lewy Alt + 'E'")
-MyGui.Add("Radio", "x10 y130 w500", "1: Prawy Alt + ','     2: Prawy Alt + '.'     `(przecinek i kropka`)")
+MyGui.Add("Text", "x10 y10 w470 h40", "Witam w Hardbass science 🤙️").SetFont("s18")
+MyGui.Add("Text", "x10 y60 w470 h40", "Wybierz preferowany zestaw skrótów klawiszowych:")
+MyGui.Add("Radio", "x10 y100 w470 vShortcutSet Checked", "1: Lewy Alt + 'W'    2: Lewy Alt + 'E'")
+MyGui.Add("Radio", "x10 y130 w470", "1: Prawy Alt + ','     2: Prawy Alt + '.'     `(przecinek i kropka`)")
 MyGui.Add("Button", "x10 y170 w120 h30", "OK").OnEvent("Click", ProcessChoice)
 
-MyGui.Add("Text", "x10 y220 w500", "Instrukcje użytkowania:").SetFont("s12 bold")
-MyGui.Add("Text", "x10 y250 w500", "To narzędzie służy do łatwego zbierania i zapisywania tekstu z różnych źródeł.")
-MyGui.Add("Text", "x10 y280 w500", "1. Po kliknięciu 'OK', program będzie działał w tle.")
-MyGui.Add("Text", "x10 y310 w500", "2. Zebrane dane będą zapisywane w pliku 'output.csv' w folderze skryptu.")
-MyGui.Add("Text", "x10 y340 w500", "3. Aby zapisać tekst, zaznacz go i użyj skrótu 1.")
-MyGui.Add("Text", "x10 y370 w500", "4. Możesz też użyć skrótu 2, aby zapisać tekst ze schowka (ctrl+c).")
-MyGui.Add("Text", "x10 y400 w500", "5. Regularnie sprawdzaj plik 'output.csv' i rób kopie zapasowe.")
-MyGui.Add("Text", "x10 y430 w500", "6. Aby zakończyć, kliknij prawym przyciskiem myszy na ikonę 'H' w obszarze powiadomień.")
+MyGui.Add("Text", "x10 y220 w470 h30", "Instrukcja").SetFont("s12 bold")
+MyGui.Add("Text", "x20 y250 w470 h210", "To narzędzie służy do łatwego zbierania i zapisywania tekstu z różnych źródeł.`nPo kliknięciu 'OK', program będzie działał w tle.`nZebrane dane będą zapisywane w pliku 'output.csv' w folderze ze skryptem.`nAby zapisać tekst, zaznacz go i użyj skrótu 1. Możesz też użyć skrótu 2, aby zapisać tekst wcześniej zapisany w schowku (ctrl+c). `nRegularnie sprawdzaj plik 'output.csv' i rób kopie zapasowe.`nAby zakończyć, kliknij prawym przyciskiem myszy na ikonę 'H' w obszarze powiadomień (w prawym rogu paska zadań systemu windows), lub kliknij Alt+Esc")
+MyGui.Add("Text", "x20 y470 w470 h20 Right", "Wersja z dnia 15-10-2024").SetFont("s8")
+
 
 MyGui.OnEvent("Close", (*) => ExitApp())
 MyGui.Title := "Hardbass Science"
@@ -131,3 +127,13 @@ ProcessClipboard(*)
         }
     }
 }
+
+; Function to exit the script
+ExitScript() {
+    MsgBox("Już się wyłączam", "Wyjście", "T3")
+    ExitApp
+}
+
+; Create a hotkey to exit the script (Ctrl+Q)
+!Esc::ExitScript()
+
