@@ -33,7 +33,7 @@ MyGui.Add("Button", "x10 y170 w120 h30", "OK").OnEvent("Click", ProcessChoice)
 MyGui.Add("Text", "x10 y220 w470 h30", "Instrukcja").SetFont("s12 bold")
 MyGui.Add("Text", "x20 y250 w470 h210", "To narzędzie służy do łatwego zbierania i zapisywania tekstu z różnych źródeł.`nPo kliknięciu 'OK', program będzie działał w tle.`nZebrane dane będą zapisywane w pliku 'output.csv' w folderze ze skryptem.`nAby zapisać tekst, zaznacz go i wciśnij skrót 1. Alternatywnie skorzystaj ze skrótu 2, aby użyć tekstu wcześniej zapisanego w schowku (ctrl+c). `nRegularnie sprawdzaj plik 'output.csv' i rób kopie zapasowe.`nAby zakończyć, kliknij prawym przyciskiem myszy na ikonę 'H' w obszarze powiadomień (w prawym rogu paska zadań systemu windows), lub kliknij Alt+Esc")
 MyGui.Add("Text", "x20 y450 w470 h20 Right", "Wersja z dnia 16-10-2024").SetFont("s8")
-MyGui.Add("Text", "x20 y470 w450 h20 Right", "Specjalnie dla Uli").SetFont("s8")
+;MyGui.Add("Text", "x20 y470 w450 h20 Right", "Specjalnie dla Uli").SetFont("s8")
 ;MyGui.Add("Text", "x+0 y466 w20 h20 Right", "❤︎").SetFont("s10 cRed bold")
 
 
