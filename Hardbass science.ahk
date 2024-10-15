@@ -118,12 +118,16 @@ ProcessClipboard(*)
         FileAppend(csvLine, outputFile, "UTF-16")
         MsgBox("Jazda jazdunia!!!`nZapisano", "Sukces", "T1")
     } catch as writeError {
-        errorMessage := EscapeCSV("ERROR: " . A_Now) . "," . EscapeCSV("Error writing to CSV: " . writeError.Message) . "," . EscapeCSV("ERROR") . "`n"
-        try {
-            FileAppend(errorMessage, outputFile, "UTF-16")
-            MsgBox("Błąd: Nie można zapisać danych.", "Błąd zapisu", "T2")
-        } catch as logError {
-            MsgBox("Krytyczny błąd: Nie można zapisać danych ani zalogować błędu. " . logError.Message, "Błąd krytyczny", "T16")
+        if (writeError.Number == 32) {  ; Error code 32 indicates the file is in use by another process
+            MsgBox("Błąd: Plik 'output.csv' jest obecnie używany przez inny program. Zamknij wszystkie programy, które mogą korzystać z tego pliku i spróbuj ponownie.", "Plik w użyciu", "T16")
+        } else {
+            errorMessage := EscapeCSV("ERROR: " . A_Now) . "," . EscapeCSV("Error writing to CSV: " . writeError.Message) . "," . EscapeCSV("ERROR") . "`n"
+            try {
+                FileAppend(errorMessage, outputFile, "UTF-16")
+                MsgBox("Błąd: Nie można zapisać danych.", "Błąd zapisu", "T2")
+            } catch as logError {
+                MsgBox("Krytyczny błąd: Nie można zapisać danych ani zalogować błędu. " . logError.Message, "Błąd krytyczny", "T16")
+            }
         }
     }
 }
