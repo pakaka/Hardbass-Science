@@ -87,12 +87,12 @@ ProcessClipboard(*)
     }
     userInput.Value := userInput.Value = "" ? "???" : userInput.Value
 
-    userInput3 := InputBox("To zostanie zapiane w kolumnie 3 (np. nazwisko autora): ")
-    if userInput3.Result = "Cancel" {
+    userInput2 := InputBox("To zostanie zapiane w kolumnie 2 (np. nazwisko autora): ")
+    if userInput2.Result = "Cancel" {
         MsgBox("Operacja anulowana przez użytkownika.", "Informacja", "T1")
         return
     }
-    userInput3.Value := userInput3.Value = "" ? "???" : userInput3.Value
+    userInput2.Value := userInput2.Value = "" ? "???" : userInput2.Value
 
     ; Function to properly escape and quote CSV fields
     EscapeCSV(field) {
@@ -107,11 +107,11 @@ ProcessClipboard(*)
 
     ; Escape and quote the user inputs and clipboard content
     userInput := EscapeCSV(userInput.Value)
-    userInput3 := EscapeCSV(userInput3.Value)
+    userInput2 := EscapeCSV(userInput2.Value)
     clipboardContent := EscapeCSV(A_Clipboard)
 
     ; Create the CSV line
-    csvLine := userInput . "," . clipboardContent . "," . userInput3 . "`n"
+    csvLine := userInput . "," . userInput2 . "," . clipboardContent . "`n"
 
     ; Append the user inputs and clipboard content to the CSV file in UTF-16 with BOM
     try {
