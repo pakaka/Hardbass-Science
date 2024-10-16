@@ -12,8 +12,6 @@ Hardbass Science to narzędzie do zbierania i organizowania tekstu, zaprojektowa
 3. wypakuj plik `Hardbass science.ahk` (plik `readme.md nie jest ważny, zaweira tylko instrukcję, którą właśnie czytasz)
 3. Umieść plik skryptu w dogodnej lokalizacji na komputerze.
   
-> Regularnie publikuję aktualizacje. W przypadku zainteresowania, rozważę stworzenie łatwiejszej w instalacji wersji w pliku wykonywalnym *.exe.
-
 ## Użycie
 Kliknij dwukrotnie plik Hardbass science.ahk, aby uruchomić skrypt.<br>
 Pojawi się interfejs graficzny, kliknij "OK", aby uruchomić program. Będzie działał w tle.<br>
