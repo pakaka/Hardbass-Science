@@ -96,13 +96,14 @@ ProcessClipboard(*)
 {
     global outputFile, lastUserInput1, lastUserInput2, lastUserInput3, inputPromptCount  
 
-    ; Show the preview GUI
+    ; Show the clipboard preview GUI
     PreviewGui := Gui()
-    PreviewGui.Opt("+Resize +MinSize400x300")
-    PreviewGui.SetFont("s10", "Segoe UI")
-    PreviewGui.Add("Edit", "x10 y10 w380 h200 vClipboardContent", A_Clipboard)
-    PreviewGui.Add("Button", "x10 y220 w90 h30", "Zapisz").OnEvent("Click", SaveContent)
-    PreviewGui.Add("Button", "x110 y220 w90 h30", "Anuluj").OnEvent("Click", (*) => PreviewGui.Destroy())
+    PreviewGui.Opt("+Resize +MinSize500x300")  ; Increased minimum width to 500
+    PreviewGui.SetFont("s7", "Segoe UI")
+    PreviewGui.Add("Edit", "x10 y10 w480 h200 vClipboardContent", A_Clipboard)  ; Increased width to 480
+    saveButton := PreviewGui.Add("Button", "x125 y220 w90 h30", "Ok")
+    saveButton.OnEvent("Click", SaveContent)
+    PreviewGui.Add("Button", "x285 y220 w90 h30", "Cancel").OnEvent("Click", (*) => PreviewGui.Destroy())
     PreviewGui.OnEvent("Close", (*) => PreviewGui.Destroy())
     PreviewGui.Title := "Podgląd i edycja schowka"
     
@@ -115,7 +116,8 @@ ProcessClipboard(*)
     }
     
     PreviewGui.Show()
-    
+    saveButton.Focus()  ; Focus the "Ok" button after showing the GUI
+
     ; Wait for the GUI to close
     WinWaitClose("ahk_id " . PreviewGui.Hwnd)
     
