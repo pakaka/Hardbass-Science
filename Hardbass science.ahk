@@ -17,7 +17,7 @@ if !FileExist(outputFile) {
 
 ; Add these global variables at the top of your script, after other global declarations
 global lastUserInput1 := "???"
-global lastUserInput2 := "lorem ipsum"
+global lastUserInput2 := "???"
 
 ; Create a custom GUI for user to choose the shortcut set
 MyGui := Gui(, "w500")
@@ -87,7 +87,7 @@ ProcessClipboard(*)
         return
     }
 
-    userInput1 := InputBox("To zostanie zapiane w kolumnie 1 (np. kategoria, tytuł akpitu): ", , , lastUserInput1)
+    userInput1 := InputBox("To zostanie zapiane w kolumnie 1 np. kategoria, tytuł akpitu: `n`(pozostawienie pustego pola automatycznie wypełnia je symbolem zastępczym '???'`)", , , lastUserInput1)
     if userInput1.Result = "Cancel" {
         MsgBox("Operacja anulowana przez użytkownika.", "Informacja", "T1")
         return
@@ -95,7 +95,7 @@ ProcessClipboard(*)
     userInput1.Value := userInput1.Value = "" ? "???" : userInput1.Value
     lastUserInput1 := userInput1.Value  ; Remember the last input
 
-    userInput2 := InputBox("To zostanie zapiane w kolumnie 2 (np. nazwisko autora): ", , , lastUserInput2)
+    userInput2 := InputBox("To zostanie zapiane w kolumnie 2 np. nazwisko autora: `n`(pozostawienie pustego pola automatycznie wypełnia je symbolem zastępczym '???'`)", , , lastUserInput2)
     if userInput2.Result = "Cancel" {
         MsgBox("Operacja anulowana przez użytkownika.", "Informacja", "T1")
         return
