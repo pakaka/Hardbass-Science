@@ -96,11 +96,31 @@ ProcessClipboard(*)
 {
     global outputFile, lastUserInput1, lastUserInput2, lastUserInput3, inputPromptCount  
 
-    ; Capture clipboard content immediately
-    clipboardContent := A_Clipboard
-
+    ; Show the preview GUI
+    PreviewGui := Gui()
+    PreviewGui.Opt("+Resize +MinSize400x300")
+    PreviewGui.SetFont("s10", "Segoe UI")
+    PreviewGui.Add("Edit", "x10 y10 w380 h200 vClipboardContent", A_Clipboard)
+    PreviewGui.Add("Button", "x10 y220 w90 h30", "Zapisz").OnEvent("Click", SaveContent)
+    PreviewGui.Add("Button", "x110 y220 w90 h30", "Anuluj").OnEvent("Click", (*) => PreviewGui.Destroy())
+    PreviewGui.OnEvent("Close", (*) => PreviewGui.Destroy())
+    PreviewGui.Title := "Podgląd i edycja schowka"
+    
+    clipboardContent := ""
+    
+    SaveContent(*)
+    {
+        clipboardContent := PreviewGui["ClipboardContent"].Value
+        PreviewGui.Destroy()
+    }
+    
+    PreviewGui.Show()
+    
+    ; Wait for the GUI to close
+    WinWaitClose("ahk_id " . PreviewGui.Hwnd)
+    
     if (clipboardContent = "") {
-        MsgBox("Schowek jest pusty, nic nie skopiowano.", "Uwaga", "T2")
+        MsgBox("Schowek jest pusty lub operacja anulowana.", "Uwaga", "T2")
         return
     }
 
@@ -180,4 +200,3 @@ ExitScript() {
 
 ; Create a hotkey to exit the script (Ctrl+Q)
 !Esc::ExitScript()
-
