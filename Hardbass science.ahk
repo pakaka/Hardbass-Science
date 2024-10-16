@@ -3,6 +3,10 @@
 #Warn  ; Enable warnings to assist with detecting common errors.
 SetWorkingDir A_ScriptDir  ; Ensures a consistent starting directory.
 
+; --------------------------
+versionNumber := "16-10-2024 v3"
+; --------------------------
+
 ; Check if output.csv exists, create it if not
 outputFile := A_WorkingDir . "\output.csv"
 if !FileExist(outputFile) {
@@ -38,9 +42,9 @@ MyGui.Add("Button", "x10 y270 w120 h30", "OK").OnEvent("Click", ProcessChoice)
 
 MyGui.Add("Text", "x10 y310 w470 h30", "Instrukcja").SetFont("s12 bold")
 MyGui.Add("Text", "x20 y340 w470 h210", "To narzędzie służy do łatwego zbierania i zapisywania tekstu z różnych źródeł.`nPo kliknięciu 'OK', program będzie działał w tle.`nZebrane dane będą zapisywane w pliku 'output.csv' w folderze ze skryptem.`nAby zapisać tekst, zaznacz go i wciśnij skrót 1. Alternatywnie skorzystaj ze skrótu 2, aby użyć tekstu wcześniej zapisanego w schowku (ctrl+c). `nRegularnie sprawdzaj plik 'output.csv' i rób kopie zapasowe.`nAby zakończyć, kliknij prawym przyciskiem myszy na ikonę 'H' w obszarze powiadomień (w prawym rogu paska zadań systemu windows), lub kliknij Alt+Esc")
-MyGui.Add("Text", "x20 y500 w470 h20 Right", "Wersja z dnia 16-10-2024 v2").SetFont("s8")
+MyGui.Add("Text", "x20 y500 w470 h20 Right", "Wersja z dnia " . versionNumber).SetFont("s8")
 ;MyGui.Add("Text", "x20 y520 w450 h20 Right", "Specjalnie dla Uli").SetFont("s8")
-;MyGui.Add("Text", "x+0 y520 w20 h20 Right", "❤︎").SetFont("s10 cRed bold")
+;MyGui.Add("Text", "x+0 y516 w20 h20 Right", "❤︎").SetFont("s10 cRed bold")
 
 MyGui.OnEvent("Close", (*) => ExitApp())
 MyGui.Title := "Hardbass Science"
@@ -92,7 +96,10 @@ ProcessClipboard(*)
 {
     global outputFile, lastUserInput1, lastUserInput2, lastUserInput3, inputPromptCount  
 
-    if (A_Clipboard = "") {
+    ; Capture clipboard content immediately
+    clipboardContent := A_Clipboard
+
+    if (clipboardContent = "") {
         MsgBox("Schowek jest pusty, nic nie skopiowano.", "Uwaga", "T2")
         return
     }
@@ -137,11 +144,11 @@ ProcessClipboard(*)
         return field
     }
 
-    ; Escape and quote the user inputs and clipboard content
+    ; Escape and process the user inputs and clipboard content
     userInput1 := EscapeCSV(userInput1.Value)
     userInput2 := EscapeCSV(userInput2.Value)
     userInput3 := EscapeCSV(userInput3.Value)
-    clipboardContent := EscapeCSV(A_Clipboard)
+    clipboardContent := EscapeCSV(clipboardContent)  ; Use the captured clipboard content
 
     ; Create the CSV line with the new order: userInput1, userInput2, clipboardContent, userInput3
     csvLine := userInput1 . "," . userInput2 . "," . clipboardContent . "," . userInput3 . "`n"
