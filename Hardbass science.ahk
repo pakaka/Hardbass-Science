@@ -41,10 +41,10 @@ MyGui.Add("Radio", "x10 y230 w470 Checked", "3 pola (kategoria, autor i dodatkow
 MyGui.Add("Button", "x10 y270 w120 h30", "OK").OnEvent("Click", ProcessChoice)
 
 MyGui.Add("Text", "x10 y310 w470 h30", "Instrukcja").SetFont("s12 bold")
-MyGui.Add("Text", "x20 y340 w470 h210", "To narzędzie służy do łatwego zbierania i zapisywania tekstu z różnych źródeł.`nPo kliknięciu 'OK', program będzie działał w tle.`nZebrane dane będą zapisywane w pliku 'output.csv' w folderze ze skryptem.`nAby zapisać tekst, zaznacz go i wciśnij skrót 1. Alternatywnie skorzystaj ze skrótu 2, aby użyć tekstu wcześniej zapisanego w schowku (ctrl+c). `nRegularnie sprawdzaj plik 'output.csv' i rób kopie zapasowe.`nAby zakończyć, kliknij prawym przyciskiem myszy na ikonę 'H' w obszarze powiadomień (w prawym rogu paska zadań systemu windows), lub kliknij Alt+Esc")
-MyGui.Add("Text", "x20 y500 w470 h20 Right", "Wersja z dnia " . versionNumber).SetFont("s8")
-;MyGui.Add("Text", "x20 y520 w450 h20 Right", "Specjalnie dla Uli").SetFont("s8")
-;MyGui.Add("Text", "x+0 y516 w20 h20 Right", "❤︎").SetFont("s10 cRed bold")
+MyGui.Add("Text", "x20 y340 w470 h310", "To narzędzie służy do łatwego zbierania i zapisywania tekstu z różnych źródeł.`nPo kliknięciu 'OK', program będzie działał w tle.`nZebrane dane będą zapisywane w pliku 'output.csv' w folderze ze skryptem.`nAby zapisać tekst, zaznacz go i wciśnij skrót 1. Alternatywnie skorzystaj ze skrótu 2, aby użyć tekstu wcześniej zapisanego w schowku (ctrl+c). `nRegularnie sprawdzaj plik 'output.csv' i rób kopie zapasowe.`nAby zakończyć, kliknij prawym przyciskiem myszy na ikonę 'H' w obszarze powiadomień (w prawym rogu paska zadań systemu windows), lub kliknij Alt+Esc")
+MyGui.Add("Text", "x20 y600 w470 h20 Right", "Wersja z dnia " . versionNumber).SetFont("s8")
+;MyGui.Add("Text", "x20 y620 w450 h20 Right", "Specjalnie dla Uli").SetFont("s8")
+;MyGui.Add("Text", "x+0 y616 w20 h20 Right", "❤︎").SetFont("s10 cRed bold")
 
 MyGui.OnEvent("Close", (*) => ExitApp())
 MyGui.Title := "Hardbass Science"
