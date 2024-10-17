@@ -206,3 +206,33 @@ ExitScript() {
 
 ; Create a hotkey to exit the script (Ctrl+Q)
 !Esc::ExitScript()
+
+; Add this new hotkey and function near the end of the file, before ExitScript()
+!d::GetDOI()
+
+GetDOI() {
+    ; Copy selected text
+    Send "^c"
+    Sleep 100  ; Short delay to ensure the copy operation completes
+
+    ; Get text from clipboard (which now contains the selected text)
+    articleQuery := A_Clipboard
+
+    ; Check if selection is not empty
+    if (articleQuery != "") 
+    {
+        ; Escape special characters in the query
+        articleQuery := StrReplace(articleQuery, '"', '\"')
+        
+        ; Run the Python script and capture the output
+        command := 'python get_doi.py "' . articleQuery . '"'
+        result := ComObject("WScript.Shell").Exec(command).StdOut.ReadAll()
+
+        ; Display the result in a message box
+        MsgBox(result)
+    }
+    else
+    {
+        MsgBox("Nie zaznaczono żadnego tekstu. Zaznacz tekst przed uruchomieniem skryptu.", "Brak zaznaczenia", "T2")
+    }
+}
