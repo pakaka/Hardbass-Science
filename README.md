@@ -28,7 +28,7 @@ Regularnie sprawdzaj plik `output.csv` i twórz jego kopie zapasowe. <br>
 alternatywnie możesz otworzyć plik w Excelu [^2].
 
 ## Aby zakończyć program, możesz:
-* Kliknąć prawym przyciskiem myszy ikonę 'H' w zasobniku systemowym (prawy dolny róg paska zadań systemu Windows) i wybrać "Zakończ"
+* Kliknąć prawym przyciskiem myszy ikonę '🤙' w zasobniku systemowym (prawy dolny róg paska zadań systemu Windows) i wybrać "Zakończ"
 * Nacisnąć Alt+Esc
 
 ## Uwagi
