@@ -1,5 +1,6 @@
 import requests
 import sys
+import time
 
 def get_doi_and_title(query):
     base_url = "https://api.crossref.org/works"
@@ -41,10 +42,11 @@ if __name__ == "__main__":
     doi, title = main(article_query)
     
     if doi and title:
-        print(f"DOI: {doi}")
-        print(f"Title: {title}")
+        print(doi)
+        print(title)
     else:
         print(f"No results found for the query: '{article_query}'")
 
 # Export the functions
 __all__ = ['get_doi_and_title', 'main']
+

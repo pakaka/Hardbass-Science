@@ -208,7 +208,7 @@ ExitScript() {
 !Esc::ExitScript()
 
 ; Add this new hotkey and function near the end of the file, before ExitScript()
-!d::GetDOI()
+!r::GetDOI()
 
 GetDOI() {
     ; Copy selected text
@@ -228,11 +228,66 @@ GetDOI() {
         command := 'python get_doi.py "' . articleQuery . '"'
         result := ComObject("WScript.Shell").Exec(command).StdOut.ReadAll()
 
-        ; Display the result in a message box
-        MsgBox(result)
+        ; Extract DOI from the result (assuming it's the first line)
+        doi := StrSplit(result, "`n")[1]
+
+        ; Extract title from the result (assuming it's the second line)
+        title := StrSplit(result, "`n")[2]
+
+        ; Check if DOI starts with "No results found"
+        if (SubStr(doi, 1, 16) = "No results found") {
+            doi := "Nie znaleziono pracy w bazie crossref.org"
+            title := "Nie znaleziono pracy w bazie crossref.org"
+        }
+
+
+        ; Create a GUI to display the results
+        ResultGui := Gui()
+        ResultGui.Opt("+AlwaysOnTop")
+        ResultGui.SetFont("s10", "Segoe UI")
+        
+        ResultGui.Add("Text", "x10 y10 w480", "Pobrany tytuł:").SetFont("s7 cGray")
+
+        ResultGui.Add("Text", "x10 y30 w480 h60 vTitle", title).SetFont("s12")
+        
+        ResultGui.Add("Text", "x10 y100 w480", "DOI:").SetFont("s7 cGray")
+        ResultGui.Add("Text", "x10 y115 w480", doi).SetFont("s7 cGray")
+
+        ResultGui.Add("Text", "x10 y160 w480", "Czy znaleziony tytuł odpowiada pracy, której szukasz?").SetFont("s9 cGray")
+        ResultGui.Add("Text", "x10 y180 w480", "Jeśli tak, to zostaniesz przekierowany/a do Sci-Hub.").SetFont("s9 cGray")
+        ResultGui.Add("Text", "x10 y200 w480", "Jeśli nie, lub na Sci-Hubie brakuje tego artykułu, to musisz wyszukać go ręcznie, zaznaczony przez ciebie tekst został zapisany w schowku").SetFont("s9 cGray")
+        
+        yesButton := ResultGui.Add("Button", "x170 y240 w70 h30", "Tak")
+        yesButton.OnEvent("Click", (*) => OpenSciHub(doi, ResultGui))
+        noButton := ResultGui.Add("Button", "x260 y240 w70 h30", "Nie")
+        noButton.OnEvent("Click", (*) => ResultGui.Destroy())
+        
+        ResultGui.OnEvent("Close", (*) => ResultGui.Destroy())
+        ResultGui.Title := "Article Information"
+        ResultGui.Show()
+
+        ; Focus the appropriate button
+        if (SubStr(doi, 1, 16) = "No results found") {
+            noButton.Focus()
+        } else {
+            yesButton.Focus()
+        }
     }
     else
     {
-        MsgBox("Nie zaznaczono żadnego tekstu. Zaznacz tekst przed uruchomieniem skryptu.", "Brak zaznaczenia", "T2")
+        MsgBox("No text selected.", "Error", "T2")
+    }
+}
+
+OpenSciHub(doi, gui) {
+    ; Create Sci-Hub link
+    scihubLink := "https://www.sci-hub.st/" . doi
+
+    ; Open Sci-Hub link in default browser
+    if (doi != "") {
+        Run scihubLink
+        gui.Destroy()
+    } else {
+        MsgBox("Nie znaleziono DOI dla podanego zapytania.", "Brak DOI", "T2")
     }
 }
