@@ -4,7 +4,7 @@
 SetWorkingDir A_ScriptDir  ; Ensures a consistent starting directory.
 
 ; --------------------------
-versionNumber := "16-10-2024 v3"
+versionNumber := "16-10-2024 v5"
 ; --------------------------
 
 ; Check if output.csv exists, create it if not
@@ -43,6 +43,11 @@ MyGui.Add("Button", "x10 y270 w120 h30", "OK").OnEvent("Click", ProcessChoice)
 MyGui.Add("Text", "x10 y310 w470 h30", "Instrukcja").SetFont("s12 bold")
 MyGui.Add("Text", "x20 y340 w470 h310", "To narzędzie służy do łatwego zbierania i zapisywania tekstu z różnych źródeł.`nPo kliknięciu 'OK', program będzie działał w tle.`nZebrane dane będą zapisywane w pliku 'output.csv' w folderze ze skryptem.`nAby zapisać tekst, zaznacz go i wciśnij skrót 1. Alternatywnie skorzystaj ze skrótu 2, aby użyć tekstu wcześniej zapisanego w schowku (ctrl+c). `nRegularnie sprawdzaj plik 'output.csv' i rób kopie zapasowe.`nAby zakończyć, kliknij prawym przyciskiem myszy na ikonę 'H' w obszarze powiadomień (w prawym rogu paska zadań systemu windows), lub kliknij Alt+Esc")
 MyGui.Add("Text", "x20 y600 w470 h20 Right", "Wersja z dnia " . versionNumber).SetFont("s8")
+
+; Add GitHub link
+MyGui.Add("Link", "x20 y600 w100 h20", "<a href=`"https://github.com/pakaka/Hardbass-Science---Text-Collection-Tool`">Github</a>")
+
+
 
 
 MyGui.OnEvent("Close", (*) => ExitApp())

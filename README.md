@@ -2,18 +2,18 @@
 Hardbass Science to narzędzie do zbierania i organizowania tekstu, zaprojektowane, aby pomóc użytkownikom w łatwym gromadzeniu i zapisywaniu tekstu z różnych źródeł.
 
 ## Wymagania
-* AutoHotkey v2.0
 * System operacyjny Windows
+* (opcjonalnie [AutoHotkey](https://www.autohotkey.com/) v2.0
 
 ## Instalacja
-1. Zainstaluj AutoHotkey v2.0 z oficjalnej strony [AutoHotkey](https://www.autohotkey.com/).
+<!--1. Zainstaluj AutoHotkey v2.0 z oficjalnej strony [AutoHotkey](https://www.autohotkey.com/).-->
 2. Pobierz spakowany plik skryptu.
 ![alt text](image.png)
-3. wypakuj plik `Hardbass science.ahk` (plik `readme.md nie jest ważny, zaweira tylko instrukcję, którą właśnie czytasz)
-3. Umieść plik skryptu w dogodnej lokalizacji na komputerze.
+3. wypakuj plik `Hardbass science.exe` (archiwium zaweira również pliki `readme.md`, czyli instrukcję, którą właśnie czytasz, oraz `Hardbass science.ahk` z kodem źródłowym )
+3. Umieść plik skryptu w dogodnej lokalizacji na komputerze i używaj
   
 ## Użycie
-Kliknij dwukrotnie plik Hardbass science.ahk, aby uruchomić skrypt.<br>
+Kliknij dwukrotnie plik Hardbass science.exe, aby uruchomić skrypt.<br>
 Pojawi się interfejs graficzny, kliknij "OK", aby uruchomić program. Będzie działał w tle.<br>
 Postępuj zgodnie z instrukcjami, aby wprowadzić dodatkowe informacje dla każdego wpisu.<br>
 Zebrane dane zostaną zapisane w pliku `output.csv` w tym samym folderze co skrypt. 
@@ -26,7 +26,6 @@ Samouczek dla opornych znajdziesz na dole strony [^1].<br>
 Regularnie sprawdzaj plik `output.csv` i twórz jego kopie zapasowe. <br>
 
 alternatywnie możesz otworzyć plik w Excelu [^2].
-
 
 ## Aby zakończyć program, możesz:
 * Kliknąć prawym przyciskiem myszy ikonę 'H' w zasobniku systemowym (prawy dolny róg paska zadań systemu Windows) i wybrać "Zakończ"
