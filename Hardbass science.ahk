@@ -30,8 +30,10 @@ MyGui.SetFont("s10", "Segoe UI")
 
 MyGui.Add("Text", "x10 y10 w470 h40", "Witam w Hardbass science 🤙️").SetFont("s18")
 MyGui.Add("Text", "x10 y60 w470 h40", "Wybierz preferowany zestaw skrótów klawiszowych:")
-MyGui.Add("Radio", "x10 y100 w470 vShortcutSet Checked", "1: Lewy Alt + 'W'    2: Lewy Alt + 'E'")
-MyGui.Add("Radio", "x10 y130 w470", "1: Prawy Alt + ','     2: Prawy Alt + '.'     `(przecinek i kropka`)")
+MyGui.Add("Radio", "x10 y100 w470 vShortcutSet Checked", "1: Lewy Alt + 'W'    2: Lewy Alt + 'E'    3: Lewy Alt + 'R'")
+MyGui.Add("Radio", "x10 y130 w470", "1: Prawy Alt + ','     2: Prawy Alt + '.'     3: Prawy Alt + '/'     ")
+MyGui.Add("Text", "x10 y145 w300 h30 Center", "`(przecinek, kropka i ukośnik`)").SetFont("s8 cGray")
+
 
 ; Add new radio buttons for input prompt choice
 MyGui.Add("Text", "x10 y170 w470 h30", "Wybierz liczbę pól do wprowadzania:")
@@ -41,14 +43,11 @@ MyGui.Add("Radio", "x10 y230 w470 Checked", "3 pola (kategoria, autor i dodatkow
 MyGui.Add("Button", "x10 y270 w120 h30", "OK").OnEvent("Click", ProcessChoice)
 
 MyGui.Add("Text", "x10 y310 w470 h30", "Instrukcja").SetFont("s12 bold")
-MyGui.Add("Text", "x20 y340 w470 h310", "To narzędzie służy do łatwego zbierania i zapisywania tekstu z różnych źródeł.`nPo kliknięciu 'OK', program będzie działał w tle.`nZebrane dane będą zapisywane w pliku 'output.csv' w folderze ze skryptem.`nAby zapisać tekst, zaznacz go i wciśnij skrót 1. Alternatywnie skorzystaj ze skrótu 2, aby użyć tekstu wcześniej zapisanego w schowku (ctrl+c). `nRegularnie sprawdzaj plik 'output.csv' i rób kopie zapasowe.`nAby zakończyć, kliknij prawym przyciskiem myszy na ikonę 'H' w obszarze powiadomień (w prawym rogu paska zadań systemu windows), lub kliknij Alt+Esc")
+MyGui.Add("Text", "x20 y340 w470 h310", "To narzędzie służy do łatwego zbierania i zapisywania tekstu z różnych źródeł.`nPo kliknięciu 'OK', program będzie działał w tle.`nZebrane dane będą zapisywane w pliku 'output.csv' w folderze ze skryptem.`nAby zapisać tekst, zaznacz go i wciśnij skrót 1. Alternatywnie skorzystaj ze`nskrótu 2, aby użyć tekstu wcześniej zapisanego w schowku (ctrl+c). `nRegularnie sprawdzaj plik 'output.csv' i rób kopie zapasowe.`nAby zakończyć, kliknij prawym przyciskiem myszy na ikonę 'H' w obszarze powiadomień (w prawym rogu paska zadań systemu windows), lub kliknij Alt+Esc.`nProgram daje możliwośc wygodnego pobierania artykułów z Sci-Hub'a na podstawie DOI z bazy crossref.org, aby skorzystać z tej funkcji zaznacz tytuł pracy i aktywuj skrót 3")
 MyGui.Add("Text", "x20 y600 w470 h20 Right", "Wersja z dnia " . versionNumber).SetFont("s8")
 
 ; Add GitHub link
 MyGui.Add("Link", "x20 y600 w100 h20", "<a href=`"https://github.com/pakaka/Hardbass-Science---Text-Collection-Tool`">Github</a>")
-
-
-
 
 MyGui.OnEvent("Close", (*) => ExitApp())
 MyGui.Title := "Hardbass Science"
@@ -81,12 +80,14 @@ SetupSet1()
 {
     Hotkey "!w", CopyAndProcess
     Hotkey "!e", ProcessClipboard
+    Hotkey "!r", (*) => GetDOI()  ; Changed this line
 }
 
 SetupSet2()
 {
     Hotkey "RAlt & ,", CopyAndProcess
     Hotkey "RAlt & .", ProcessClipboard
+    Hotkey "RAlt & /", (*) => GetDOI()  ; Changed this line
 }
 
 CopyAndProcess(*)
@@ -204,13 +205,13 @@ ExitScript() {
     ExitApp
 }
 
-; Create a hotkey to exit the script (Ctrl+Q)
+; Create a hotkey to exit the script (Alt+Esc)
 !Esc::ExitScript()
 
 ; Add this new hotkey and function near the end of the file, before ExitScript()
-!r::GetDOI()
+;!r::GetDOI()
 
-GetDOI() {
+GetDOI(*) {  ; Added (*) here to make it a function object
     ; Copy selected text
     Send "^c"
     Sleep 100  ; Short delay to ensure the copy operation completes
@@ -254,8 +255,8 @@ GetDOI() {
         ResultGui.Add("Text", "x10 y115 w480", doi).SetFont("s7 cGray")
 
         ResultGui.Add("Text", "x10 y160 w480", "Czy znaleziony tytuł odpowiada pracy, której szukasz?").SetFont("s9 cGray")
-        ResultGui.Add("Text", "x10 y180 w480", "Jeśli tak, to zostaniesz przekierowany/a do Sci-Hub.").SetFont("s9 cGray")
-        ResultGui.Add("Text", "x10 y200 w480", "Jeśli nie, lub na Sci-Hubie brakuje tego artykułu, to musisz wyszukać go ręcznie, zaznaczony przez ciebie tekst został zapisany w schowku").SetFont("s9 cGray")
+        ResultGui.Add("Text", "x10 y180 w480", "Jeśli tak, to zostaniesz przekierowany/a do Sci-Hub'a.").SetFont("s9 cGray")
+        ResultGui.Add("Text", "x10 y200 w480", "Jeśli nie, lub na Sci-Hub'ie brakuje tego artykułu, to musisz wyszukać go ręcznie, zaznaczony przez ciebie tekst został zapisany w schowku").SetFont("s9 cGray")
         
         yesButton := ResultGui.Add("Button", "x170 y240 w70 h30", "Tak")
         yesButton.OnEvent("Click", (*) => OpenSciHub(doi, ResultGui))
