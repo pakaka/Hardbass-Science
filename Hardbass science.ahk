@@ -80,14 +80,14 @@ SetupSet1()
 {
     Hotkey "!w", CopyAndProcess
     Hotkey "!e", ProcessClipboard
-    Hotkey "!r", (*) => GetDOI()  ; Changed this line
+    Hotkey "!r", (*) => GetFromScihub()  ; Changed this line
 }
 
 SetupSet2()
 {
     Hotkey "RAlt & ,", CopyAndProcess
     Hotkey "RAlt & .", ProcessClipboard
-    Hotkey "RAlt & /", (*) => GetDOI()  ; Changed this line
+    Hotkey "RAlt & /", (*) => GetFromScihub()  ; Changed this line
 }
 
 CopyAndProcess(*)
@@ -162,6 +162,8 @@ ProcessClipboard(*)
 
     ; Function to properly escape and quote CSV fields
     EscapeCSV(field) {
+        ; Remove leading newline if present
+        field := RegExReplace(field, "^\R", "")
         ; Escape double quotes by doubling them
         field := StrReplace(field, '"', '""')
         ; Enclose field in double quotes if it contains commas, double quotes, or newlines
@@ -211,7 +213,7 @@ ExitScript() {
 ; Add this new hotkey and function near the end of the file, before ExitScript()
 ;!r::GetDOI()
 
-GetDOI(*) {  ; Added (*) here to make it a function object
+GetFromScihub(*) {  ; Renamed from GetDOI(*) to GetFromScihub(*)
     ; Copy selected text
     Send "^c"
     Sleep 100  ; Short delay to ensure the copy operation completes
@@ -292,3 +294,4 @@ OpenSciHub(doi, gui) {
         MsgBox("Nie znaleziono DOI dla podanego zapytania.", "Brak DOI", "T2")
     }
 }
+
