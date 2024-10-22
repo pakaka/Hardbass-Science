@@ -2,13 +2,6 @@
 
 #Warn  ; Enable warnings to assist with detecting common errors.
 SetWorkingDir A_ScriptDir  ; Ensures a consistent starting directory.
-
-; Check if Hardbass science.exe is already running
-if (ProcessExist("Hardbass science.exe")) {
-    MsgBox("Hardbass science.exe jest już uruchomiony. Zamknij istniejącą instancję przed uruchomieniem nowej.", "Program już działa", "OK")
-    ExitApp()
-}
-
 ; --------------------------
 versionNumber := "16-10-2024 v5"
 ; --------------------------
@@ -297,3 +290,7 @@ OpenSciHub(doi, gui) {
         MsgBox("Nie znaleziono DOI dla podanego zapytania.", "Brak DOI", "T2")
     }
 }
+
+
+
+
