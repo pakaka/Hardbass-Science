@@ -3,9 +3,17 @@
 #Warn  ; Enable warnings to assist with detecting common errors.
 SetWorkingDir A_ScriptDir  ; Ensures a consistent starting directory.
 
+; Check if Hardbass science.exe is already running
+if (ProcessExist("Hardbass science.exe")) {
+    MsgBox("Hardbass science.exe jest już uruchomiony. Zamknij istniejącą instancję przed uruchomieniem nowej.", "Program już działa", "OK")
+    ExitApp()
+}
+
 ; --------------------------
 versionNumber := "16-10-2024 v5"
 ; --------------------------
+
+
 
 ; Check if output.csv exists, create it if not
 outputFile := A_WorkingDir . "\output.csv"
@@ -162,14 +170,16 @@ ProcessClipboard(*)
 
     ; Function to properly escape and quote CSV fields
     EscapeCSV(field) {
-        ; Remove leading newline if present
-        field := RegExReplace(field, "^\R", "")
-        ; Escape double quotes by doubling them
+        ; Remove any existing double quotes at the start and end
+        field := RegExReplace(field, '^"|"$', '')
+        
+        ; Replace any double quotes within the field with two double quotes
         field := StrReplace(field, '"', '""')
-        ; Enclose field in double quotes if it contains commas, double quotes, or newlines
-        if (InStr(field, ",") or InStr(field, '"') or InStr(field, "`n")) {
-            return '"' . field . '"'
-        }
+        
+        ; If the field contains commas, newlines, or double quotes, enclose it in quotes
+        if (InStr(field, ",") || InStr(field, "`n") || InStr(field, '"'))
+            field := '"' . field . '"'
+        
         return field
     }
 
@@ -182,22 +192,15 @@ ProcessClipboard(*)
     ; Create the CSV line with the new order: userInput1, userInput2, clipboardContent, userInput3
     csvLine := userInput1 . "," . userInput2 . "," . clipboardContent . "," . userInput3 . "`n"
 
-    ; Append the user inputs and clipboard content to the CSV file in UTF-16 with BOM
+    ; Append the user inputs and clipboard content to the CSV file in UTF-8 with BOM
     try {
-        FileAppend(csvLine, outputFile, "UTF-16")
+        if (!FileExist(outputFile)) {
+            FileAppend(Chr(0xFEFF), outputFile, "UTF-8")  ; Add UTF-8 BOM if file doesn't exist
+        }
+        FileAppend(csvLine, outputFile, "UTF-8")
         MsgBox("Jazda jazdunia!!!`nZapisano", "Sukces", "T1")
     } catch as writeError {
-        if (writeError.Number == 32) {  ; Error code 32 indicates the file is in use by another process
-            MsgBox("Błąd: Plik 'output.csv' jest obecnie używany przez inny program. Zamknij wszystkie programy, które mogą korzystać z tego pliku i spróbuj ponownie.", "Plik w użyciu", "T16")
-        } else {
-            errorMessage := EscapeCSV("ERROR: " . A_Now) . "," . EscapeCSV("Error writing to CSV: " . writeError.Message) . "," . EscapeCSV("ERROR") . "`n"
-            try {
-                FileAppend(errorMessage, outputFile, "UTF-16")
-                MsgBox("Błąd: Nie można zapisać danych.", "Błąd zapisu", "T2")
-            } catch as logError {
-                MsgBox("Krytyczny błąd: Nie można zapisać danych ani zalogować błędu. " . logError.Message, "Błąd krytyczny", "T16")
-            }
-        }
+        MsgBox("Error writing to file: " . writeError.Message, "Error", "T3")
     }
 }
 
@@ -294,4 +297,3 @@ OpenSciHub(doi, gui) {
         MsgBox("Nie znaleziono DOI dla podanego zapytania.", "Brak DOI", "T2")
     }
 }
-
