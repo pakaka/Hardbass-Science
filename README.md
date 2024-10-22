@@ -8,7 +8,7 @@ Hardbass Science to narzędzie do zbierania i organizowania tekstu, zaprojektowa
 ## Instalacja
 <!--1. Zainstaluj AutoHotkey v2.0 z oficjalnej strony [AutoHotkey](https://www.autohotkey.com/).-->
 2. Pobierz spakowany plik skryptu.
-![alt text](image.png)
+![alt text](System_Files/readme%20resources/image.png)
 3. wypakuj plik `Hardbass science.exe` (archiwium zaweira również pliki `readme.md`, czyli instrukcję, którą właśnie czytasz, oraz `Hardbass science.ahk` z kodem źródłowym )
 3. Umieść plik skryptu w dogodnej lokalizacji na komputerze i używaj
   
@@ -55,5 +55,5 @@ stenzelpawel.t@gmail.com
     4. Wybierz plik CSV, który chcesz otworzyć.
     5. Kliknij Importuj.
     6. Kreator importu tekstu:
-    ![alt text](image-2.png)
+    ![alt text](System_Files/readme%20resources/image-2.png)
     7. kliknij załaduj

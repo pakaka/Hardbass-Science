@@ -231,7 +231,7 @@ GetFromScihub(*) {  ; Renamed from GetDOI(*) to GetFromScihub(*)
         articleQuery := StrReplace(articleQuery, '"', '\"')
         
         ; Run the Python script and capture the output
-        command := 'python get_doi.py "' . articleQuery . '"'
+        command := 'python System_Files\get_doi.py "' . articleQuery . '"'
         result := ComObject("WScript.Shell").Exec(command).StdOut.ReadAll()
 
         ; Extract DOI from the result (assuming it's the first line)
