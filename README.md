@@ -1,4 +1,5 @@
-# 🤖 Hardbass Science 🤙 
+# 🤖 Hardbass Science 🤙 -Text Collection Tool
+
 Hardbass Science to narzędzie do zbierania i organizowania tekstu, zaprojektowane, aby pomóc użytkownikom w łatwym gromadzeniu i zapisywaniu tekstu z różnych źródeł.
 
 ## Wymagania
