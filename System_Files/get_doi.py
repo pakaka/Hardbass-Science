@@ -2,6 +2,8 @@ import requests
 import sys
 import time
 
+# This script is used to create `System_Files\dist\get_doi.exe` file, and is not executable by itself.
+
 def get_doi_and_title(query):
     base_url = "https://api.crossref.org/works"
     params = {

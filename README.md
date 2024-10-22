@@ -32,8 +32,12 @@ alternatywnie możesz otworzyć plik w Excelu [^2].
 * Kliknąć prawym przyciskiem myszy ikonę '🤙' w zasobniku systemowym (prawy dolny róg paska zadań systemu Windows) i wybrać "Zakończ"
 * Nacisnąć Alt+Esc
 
-## Uwagi
-Dane są zapisywane w kodowaniu UTF-16 z BOM. (ale 1200:Unicode też działa z jakiegoś powodu)<br>
+## FAQ
+- dlaczego to tyle waży?<br>
+Program napisałem w dwóch językach: AutoHotkey (większość funkcji) oraz Python (pobieranie danych z Crossref.org). Jest to nieefektywne, bo aby program działał prawidłwo muszę spakować oba interpretery (AutoHotkey i Python) wraz z zależnościami. Wszystko to waży dużo, ale działa - może kiedyś przepiszę wszystko w Pythonie, aby całość była lżejsza.
+- Dane są zapisywane w kodowaniu UTF-16 z BOM. (ale 1200:Unicode też działa z jakiegoś powodu)<br>
+
+
 
 ## Napisz do mnie
 stenzelpawel.t@gmail.com

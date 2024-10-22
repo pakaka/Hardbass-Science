@@ -223,8 +223,8 @@ GetFromScihub(*) {  ; Renamed from GetDOI(*) to GetFromScihub(*)
         ; Escape special characters in the query
         articleQuery := StrReplace(articleQuery, '"', '\"')
         
-        ; Run the Python script and capture the output
-        command := 'python System_Files\get_doi.py "' . articleQuery . '"'
+        ; Run the executable and capture the output
+        command := 'System_Files\dist\get_doi.exe "' . articleQuery . '"'
         result := ComObject("WScript.Shell").Exec(command).StdOut.ReadAll()
 
         ; Extract DOI from the result (assuming it's the first line)
@@ -290,6 +290,7 @@ OpenSciHub(doi, gui) {
         MsgBox("Nie znaleziono DOI dla podanego zapytania.", "Brak DOI", "T2")
     }
 }
+
 
 
 
