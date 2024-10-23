@@ -4,7 +4,7 @@ Hardbass Science to narzędzie do zbierania i organizowania tekstu, zaprojektowa
 
 ## Instalacja
 1. Pobierz spakowany plik skryptu.
-![alt text](System_Files/readme%20resources/image.png)
+<img src="System_Files/readme%20resources/image.png" alt="Download instructions" width="300"/>
 3. wypakuj **wszystkie** pliki do dogodnego folderu
 4. uruchom plik `🤙 Hardbass science.exe` <br>
 (paczka zip zawiera pliki niezbędne do działania programu, gdy usuniesz jeden z nich, lub przeniesisz do innego folderu, program może nie działać)
@@ -31,7 +31,7 @@ Zebrane dane zostaną zapisane w pliku `output.csv` w tym samym folderze co skry
 
 ### Wyświetlanie i edycja pliku CSV<br>
 Wygodny podgląd danych z pliku `output.csv` dostępny jest w pliku `show gathered data.xlsx`. Dane są wczytywane z użyciem Power Query, plik excel może być otwarty w trakcie działania skryptu, ale aby wyświelnić zmiany kliknij `odśwież` w zakładce `dane`na pasku u góry ekranu.
-![alt text](System_Files/readme%20resources/image-3.png)
+<img src="System_Files/readme%20resources/image-3.png" alt="Excel refresh data" width="300"/>
 
 
 > [!WARNING]
