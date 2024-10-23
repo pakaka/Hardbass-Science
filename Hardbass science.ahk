@@ -12,7 +12,7 @@ versionNumber := "16-10-2024 v5"
 outputFile := A_WorkingDir . "\output.csv"
 if !FileExist(outputFile) {
     try {
-        FileAppend("", outputFile, "UTF-16")
+        FileAppend(Chr(0xFEFF), outputFile, "UTF-8")  ; Create file with UTF-8 BOM
         MsgBox("Utworzono nowy plik 'output.csv'. Zbierany przez ciebie tekst będzie tam zapisywany.", "Plik Utworzony")
     } catch as err {
         MsgBox("Error: Nie udało się utworzyć pliku 'output.csv', spróbuj stworzyć go samodzielnie w folderze z tym skryptem.", "Error")
@@ -290,6 +290,7 @@ OpenSciHub(doi, gui) {
         MsgBox("Nie znaleziono DOI dla podanego zapytania.", "Brak DOI", "T2")
     }
 }
+
 
 
 
