@@ -22,7 +22,8 @@ Aby zignorować ostrzeżenie, kliknij "Więcej informacji" > "Uruchom mimo to".
 * `readme.md`, czyli instrukcję, którą właśnie czytasz
 * `Hardbass science.ahk` z kodem źródłowym, do jego uruchomienia potrzebny jest [AutoHotkey 2.0](https://www.autohotkey.com/) - jeśli czujesz się na siłach, możesz samodzielnie wprowadzać w nim zmiany.
 * `system_files/` folder zawiera dodatkowe pliki niezbędne do działania programu.
- 
+
+
   
 ## Użycie
 Po uruchomieniu `🤙 Hardbass science.exe` pojawi się interfejs graficzny, kliknij "OK", aby uruchomić program. Od tej pory będzie działał w tle.<br>
@@ -30,7 +31,7 @@ Postępuj zgodnie z instrukcjami, aby wprowadzić dodatkowe informacje dla każd
 Zebrane dane zostaną zapisane w pliku `output.csv` w tym samym folderze co skrypt. 
 
 ### Wyświetlanie i edycja pliku CSV<br>
-Wygodny podgląd danych z pliku `output.csv` dostępny jest w pliku `show gathered data.xlsx`. Dane są wczytywane z użyciem Power Query, plik excel może być otwarty w trakcie działania skryptu, ale aby wyświelnić zmiany kliknij `odśwież` w zakładce `dane`na pasku u góry ekranu.
+Wygodny podgląd danych z pliku `output.csv` dostępny jest w pliku `show gathered data.xlsx`. Dane są wczytywane z użyciem Power Query, plik excel może być otwarty w trakcie działania skryptu, ale aby wyświelnić zmiany kliknij `odśwież` w zakładce `dane`na pasku u góry ekranu.<br>
 <img src="System_Files/readme%20resources/image-3.png" alt="Excel refresh data" width="300"/>
 
 
@@ -46,8 +47,8 @@ LibreOffice Calc jest częścią pakietu [LibreOffice](https://pl.libreoffice.or
 > Regularnie sprawdzaj plik `output.csv` i twórz jego kopie zapasowe.
 
 ## Aby zakończyć program, możesz:
-* Kliknąć prawym przyciskiem myszy ikonę '🤙' w zasobniku systemowym (prawy dolny róg paska zadań systemu Windows) i wybrać "Zakończ"
-* Nacisnąć Alt+Esc
+* Kliknąć prawym przyciskiem myszy ikonę `🤙` w zasobniku systemowym (prawy dolny róg paska zadań systemu Windows) i wybrać `Zakończ`
+* Nacisnąć `Alt+Esc`
 
 ## FAQ
 *  *Jak usunąć/edytować wpis w pliku CSV?*<br>
@@ -57,6 +58,12 @@ Zmiany dokonywane w pliku `show gathered data.xlsx` nie wpływają na plik `outp
 
 *  *dlaczego to tyle waży?*<br>
 Program napisałem w dwóch językach: AutoHotkey (większość funkcji) oraz Python (pobieranie danych z Crossref.org). Jest to nieefektywne, bo aby program działał prawidłwo muszę spakować oba interpretery (AutoHotkey i Python) wraz z zależnościami. Wszystko to waży dużo, ale działa - może kiedyś przepiszę wszystko w Pythonie, aby całość była lżejsza.
+* *Które pliki są niezbędne do działania programu, a które mogę usunąć?*<br>
+Możesz bezpiecznie usunąć pliki `README.md`, `show gathered data.xlsx`, `output.csv`. Pozsotałe, czyli: `Hardbass science.exe` oraz folder `system_files/` są niezbędne. Plik `output.csv` zostanie automatycznie utworzony przy następnym uruchomieniu. 
+
+
+*  *obsługa wartości pustych*<br>
+Puste pole są zapisywane jako `???`. (wybrałem takie oznaczenie zamiast typowego `""`, aby ułatwić laikom zarządzanie danymi np. przy pomocy `znajdź i zamień`)
 *  Dane są zapisywane w kodowaniu UTF-8 z BOM. (ale 1200:Unicode też działa z jakiegoś powodu)<br>
 
 ## Wymagania:
